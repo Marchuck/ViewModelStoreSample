@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="activity scope"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/counter_activity_scope"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/counter_app_scope" />
@@ -63,7 +63,7 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#ff0"
+        android:background="#28FFFF00"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/counter_app_scope" />
 

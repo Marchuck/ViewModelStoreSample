@@ -12,8 +12,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    val customActivityStore = ViewModelStore()
-
     val activityScopedViewModel by provideStoredViewModel<CounterViewModel>(
         { viewModelStore },
         "Activity Scoped"

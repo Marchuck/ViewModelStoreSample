@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class CounterViewModel(private val name: String) : ViewModel() {
+open class CounterViewModel(private val name: String) : ViewModel() {
 
     val counter = MutableLiveData<Int>().apply { value = initialValue() }
 

@@ -10,13 +10,6 @@ import androidx.lifecycle.ViewModelStore
 val Context.app: App
     get() = applicationContext as App
 
-class CounterViewModelFactory(private val name: String) : ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return CounterViewModel(name) as T
-    }
-}
-
 inline fun <reified T : ViewModel> provideStoredViewModel(
     noinline storeProducer: () -> ViewModelStore,
     name: String
@@ -24,5 +17,12 @@ inline fun <reified T : ViewModel> provideStoredViewModel(
     ViewModelLazy(
         T::class,
         storeProducer,
-        { CounterViewModelFactory(name) })
+        { adHocFactory { CounterViewModel(name) } })
 
+
+fun <T : ViewModel> adHocFactory(factory: () -> T): ViewModelProvider.Factory {
+    return object : ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>) =
+            factory.invoke() as T
+    }
+}
