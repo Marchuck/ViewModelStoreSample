@@ -20,6 +20,7 @@ inline fun <reified T : ViewModel> provideStoredViewModel(
         { adHocFactory { CounterViewModel(name) } })
 
 
+@Suppress("UNCHECKED_CAST")
 fun <T : ViewModel> adHocFactory(factory: () -> T): ViewModelProvider.Factory {
     return object : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>) =

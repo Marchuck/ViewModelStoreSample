@@ -44,7 +44,6 @@ class CounterFragment : Fragment(R.layout.fragment_counter) {
                 narrowedViewModel::decrement,
                 narrowedViewModel::increment
             )
-            duckTapeNarrowedViewModelIfNeeded()
         }
         extendedViewModel.counter.observe {
             counter_extended_scope.bind(
@@ -58,16 +57,6 @@ class CounterFragment : Fragment(R.layout.fragment_counter) {
     override fun onPause() {
         super.onPause()
         narrowedViewModelStore.clear()
-    }
-
-    /**
-     * this isn't really a duck tape - it makes viewModelStore.clear() working intuitively (IMO)
-     */
-    private fun duckTapeNarrowedViewModelIfNeeded() {
-        val helper = ViewModelStoreHelper(narrowedViewModelStore)
-        if (helper.keys().isEmpty()) {
-            helper.put(CounterViewModel::class.java.canonicalName, narrowedViewModel)
-        }
     }
 
     private fun <T> LiveData<T>.observe(observer: (T) -> Unit) {
