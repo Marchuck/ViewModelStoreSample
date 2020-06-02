@@ -23,9 +23,8 @@ class CounterFragment : Fragment(R.layout.fragment_counter) {
 
     val extendedViewModel by viewModels<CounterViewModel1>(
         ownerProducer = { requireActivity() },
-        factoryProducer = {
-            adHocFactory { CounterViewModel1("Fragment-extended Scoped") }
-        })
+        factoryProducer = adHocFactoryProducer { CounterViewModel1("Fragment-extended Scoped") }
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

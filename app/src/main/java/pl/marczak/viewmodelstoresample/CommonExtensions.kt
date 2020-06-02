@@ -17,13 +17,15 @@ inline fun <reified T : ViewModel> provideStoredViewModel(
     ViewModelLazy(
         T::class,
         storeProducer,
-        { adHocFactory { CounterViewModel(name) } })
+        adHocFactoryProducer { CounterViewModel(name) })
 
 
 @Suppress("UNCHECKED_CAST")
-fun <T : ViewModel> adHocFactory(factory: () -> T): ViewModelProvider.Factory {
-    return object : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>) =
-            factory.invoke() as T
+fun <T : ViewModel> adHocFactoryProducer(viewModelFactory: () -> T): () -> ViewModelProvider.Factory {
+    return {
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>) =
+                viewModelFactory.invoke() as T
+        }
     }
 }
