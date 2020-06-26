@@ -5,10 +5,5 @@ import androidx.lifecycle.ViewModelStore
 
 class App : Application() {
 
-    lateinit var applicationStore: ViewModelStore
-
-    override fun onCreate() {
-        super.onCreate()
-        applicationStore = ViewModelStore()
-    }
+    val applicationStore = ViewModelStore()
 }
